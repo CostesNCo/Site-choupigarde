@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr" class="h-full bg-[#FAF7F2]">
+<html lang="fr" class="h-full bg-[#FAF7F2] scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choupigarde - Garde d'enfants à Toulouse et alentours</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Choupigarde - Garde d'enfants remplie de douceur</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -19,19 +18,18 @@
                             brown: '#49352B',
                             terracotta: '#B9854E',
                             card: '#FFFFFF',
-                            border: '#E3DDD3'
+                            border: '#EAE5DB'
                         }
                     },
                     fontFamily: {
-                        heading: ['Fredoka', 'Sniglet', 'cursive'],
+                        heading: ['Fredoka', 'sans-serif'],
                         body: ['Poppins', 'sans-serif']
                     }
                 }
             }
         }
     </script>
-    <!-- Fonts import (Poppins & Fredoka comme équivalent Childos) -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -40,540 +38,384 @@
         }
 
         h1, h2, h3, .font-heading {
-            font-family: 'Fredoka', cursive;
+            font-family: 'Fredoka', sans-serif;
         }
 
-        /* Moteur de ballons animés */
+        /* Ballons ultra-discrets et lents */
         .balloon {
             position: absolute;
-            bottom: -100px;
-            opacity: 0.65;
-            animation: floatUp 16s infinite ease-in-out;
+            bottom: -150px;
+            opacity: 0.15;
+            animation: floatUp 35s infinite linear;
             pointer-events: none;
-            z-index: 1;
+            z-index: 0;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.65; }
-            50% { transform: translateY(-50vh) rotate(6deg); opacity: 0.85; }
-            100% { transform: translateY(-110vh) rotate(-6deg); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg) scale(0.9); opacity: 0.15; }
+            50% { transform: translateY(-60vh) rotate(5deg) scale(1); opacity: 0.25; }
+            100% { transform: translateY(-120vh) rotate(-5deg) scale(0.9); opacity: 0; }
         }
 
-        .b-1 { left: 8%; animation-duration: 17s; animation-delay: 0s; }
-        .b-2 { left: 24%; animation-duration: 13s; animation-delay: 3s; }
-        .b-3 { left: 45%; animation-duration: 19s; animation-delay: 1s; }
-        .b-4 { left: 68%; animation-duration: 15s; animation-delay: 4s; }
-        .b-5 { left: 86%; animation-duration: 18s; animation-delay: 2s; }
+        .b-1 { left: 10%; animation-duration: 38s; animation-delay: 0s; }
+        .b-2 { left: 30%; animation-duration: 32s; animation-delay: 5s; }
+        .b-3 { left: 60%; animation-duration: 40s; animation-delay: 2s; }
+        .b-4 { left: 85%; animation-duration: 35s; animation-delay: 7s; }
 
-        /* Style multi-pages SPA */
+        /* Animations de pages et de contenu */
         .page-section {
             display: none;
             opacity: 0;
-            transition: opacity 0.25s ease-in-out;
+            transform: translateY(15px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
         .page-section.active {
             display: block;
             opacity: 1;
+            transform: translateY(0);
         }
+
+        /* Hover cards */
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(73, 53, 43, 0.08);
+            border-color: #EAB65C;
+        }
+
+        /* Masquer la scrollbar pour un look épuré */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FAF7F2; }
+        ::-webkit-scrollbar-thumb { background: #899B7A; border-radius: 10px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between relative overflow-x-hidden text-choupi-brown">
+<body class="min-h-screen flex flex-col justify-between relative overflow-x-hidden text-choupi-brown font-light">
 
-    <!-- BALLONS ANIMÉS PASTEL (CHARTE : BLEU & JAUNE) -->
+    <!-- Ballons de fond pastel discrets -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <!-- Ballon Jaune #EAB65C -->
-        <svg class="balloon b-1 w-10 h-14 text-[#EAB65C]" viewBox="0 0 50 70" fill="currentColor">
-            <ellipse cx="25" cy="30" rx="20" ry="25"/>
-            <polygon points="25,55 20,62 30,62"/>
-            <path d="M25 62 Q 20 70 25 80" stroke="#49352B" stroke-width="1.5" fill="none"/>
-        </svg>
-        <!-- Ballon Bleu #8AA9B2 -->
-        <svg class="balloon b-2 w-12 h-16 text-[#8AA9B2]" viewBox="0 0 50 70" fill="currentColor">
-            <ellipse cx="25" cy="30" rx="20" ry="25"/>
-            <polygon points="25,55 20,62 30,62"/>
-            <path d="M25 62 Q 30 70 25 80" stroke="#49352B" stroke-width="1.5" fill="none"/>
-        </svg>
-        <!-- Ballon Jaune -->
-        <svg class="balloon b-3 w-14 h-18 text-[#EAB65C]" viewBox="0 0 50 70" fill="currentColor">
-            <ellipse cx="25" cy="30" rx="20" ry="25"/>
-            <polygon points="25,55 20,62 30,62"/>
-            <path d="M25 62 Q 22 70 25 80" stroke="#49352B" stroke-width="1.5" fill="none"/>
-        </svg>
         <!-- Ballon Bleu -->
-        <svg class="balloon b-4 w-11 h-15 text-[#8AA9B2]" viewBox="0 0 50 70" fill="currentColor">
-            <ellipse cx="25" cy="30" rx="20" ry="25"/>
-            <polygon points="25,55 20,62 30,62"/>
-            <path d="M25 62 Q 28 70 25 80" stroke="#49352B" stroke-width="1.5" fill="none"/>
+        <svg class="balloon b-1 w-16 h-24 text-[#8AA9B2]" viewBox="0 0 50 70" fill="currentColor">
+            <ellipse cx="25" cy="30" rx="20" ry="25"/><polygon points="25,55 20,62 30,62"/>
+            <path d="M25 62 Q 20 70 25 80" stroke="#49352B" stroke-width="1" fill="none"/>
         </svg>
         <!-- Ballon Jaune -->
-        <svg class="balloon b-5 w-13 h-17 text-[#EAB65C]" viewBox="0 0 50 70" fill="currentColor">
-            <ellipse cx="25" cy="30" rx="20" ry="25"/>
-            <polygon points="25,55 20,62 30,62"/>
-            <path d="M25 62 Q 20 70 25 80" stroke="#49352B" stroke-width="1.5" fill="none"/>
+        <svg class="balloon b-2 w-14 h-20 text-[#EAB65C]" viewBox="0 0 50 70" fill="currentColor">
+            <ellipse cx="25" cy="30" rx="20" ry="25"/><polygon points="25,55 20,62 30,62"/>
+            <path d="M25 62 Q 30 70 25 80" stroke="#49352B" stroke-width="1" fill="none"/>
+        </svg>
+        <!-- Ballon Vert Sauge -->
+        <svg class="balloon b-3 w-16 h-24 text-[#899B7A]" viewBox="0 0 50 70" fill="currentColor">
+            <ellipse cx="25" cy="30" rx="20" ry="25"/><polygon points="25,55 20,62 30,62"/>
+            <path d="M25 62 Q 22 70 25 80" stroke="#49352B" stroke-width="1" fill="none"/>
+        </svg>
+        <!-- Ballon Jaune -->
+        <svg class="balloon b-4 w-12 h-18 text-[#EAB65C]" viewBox="0 0 50 70" fill="currentColor">
+            <ellipse cx="25" cy="30" rx="20" ry="25"/><polygon points="25,55 20,62 30,62"/>
+            <path d="M25 62 Q 28 70 25 80" stroke="#49352B" stroke-width="1" fill="none"/>
         </svg>
     </div>
 
     <!-- EN-TÊTE & NAVIGATION -->
-    <header class="relative z-20 bg-[#FAF7F2]/95 backdrop-blur border-b border-choupi-border sticky top-0">
+    <header class="relative z-20 bg-[#FAF7F2]/90 backdrop-blur-md sticky top-0 border-b border-choupi-border/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Logo avec les petits traits dorés -->
-            <a href="#" onclick="showPage('home')" class="flex items-center gap-2 group">
-                <span class="text-choupi-gold text-xl font-bold">✨</span>
-                <span class="font-heading text-2xl sm:text-3xl font-bold text-choupi-green tracking-wide group-hover:text-choupi-gold transition-colors">
+            
+            <!-- Logo avec les traits colorés de la charte (Police allégée) -->
+            <a href="#" onclick="showPage('home')" class="flex items-center gap-3 group">
+                <!-- Traits de gauche -->
+                <div class="flex flex-col gap-1.5 transform -rotate-12 translate-y-1">
+                    <div class="w-3 h-1 rounded-full bg-choupi-gold transition-all group-hover:scale-110"></div>
+                    <div class="w-4 h-1 rounded-full bg-choupi-blue transition-all group-hover:scale-110"></div>
+                </div>
+                <!-- Nom -->
+                <span class="font-heading text-2xl sm:text-3xl font-medium text-choupi-brown tracking-widest uppercase">
                     Choupigarde
                 </span>
-                <span class="text-choupi-gold text-xl font-bold">✨</span>
+                <!-- Traits de droite -->
+                <div class="flex flex-col gap-1.5 transform rotate-12 translate-y-1">
+                    <div class="w-4 h-1 rounded-full bg-choupi-green transition-all group-hover:scale-110"></div>
+                    <div class="w-3 h-1 rounded-full bg-choupi-gold transition-all group-hover:scale-110"></div>
+                </div>
             </a>
 
-            <!-- Navigation Principale (Respect strict de l'ordre) -->
-            <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-choupi-brown">
-                <a href="#" onclick="showPage('qui-sommes-nous')" class="hover:text-choupi-gold transition-colors py-1">Qui sommes-nous ?</a>
-                <a href="#" onclick="showPage('propositions')" class="hover:text-choupi-gold transition-colors py-1">Nos propositions de garde</a>
-                <a href="#" onclick="showPage('engagements')" class="hover:text-choupi-gold transition-colors py-1">Nos engagements</a>
-                <a href="#" onclick="showPage('faq')" class="hover:text-choupi-gold transition-colors py-1">FAQ</a>
-                <a href="#" onclick="showPage('offres-emploi')" class="hover:text-choupi-gold transition-colors py-1">Nos offres d'emplois</a>
-                <a href="#" onclick="showPage('contact')" class="text-choupi-green font-bold hover:text-choupi-gold transition-colors py-1 border-b-2 border-choupi-green">Contact</a>
+            <!-- Navigation Desktop -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-choupi-brown/80">
+                <a href="#" onclick="showPage('qui-sommes-nous')" class="hover:text-choupi-gold transition-colors">Qui sommes-nous ?</a>
+                <a href="#" onclick="showPage('propositions')" class="hover:text-choupi-gold transition-colors">Propositions de garde</a>
+                <a href="#" onclick="showPage('engagements')" class="hover:text-choupi-gold transition-colors">Nos engagements</a>
+                <a href="#" onclick="showPage('faq')" class="hover:text-choupi-gold transition-colors">FAQ</a>
+                <a href="#" onclick="showPage('contact')" class="px-5 py-2 bg-choupi-green/10 text-choupi-green rounded-full hover:bg-choupi-green hover:text-white transition-colors">Contact</a>
             </nav>
 
-            <!-- Bouton Hamburger Mobile -->
-            <button onclick="toggleMobileNav()" class="lg:hidden p-2 rounded-lg text-choupi-green hover:bg-choupi-green/10">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <!-- Menu Mobile -->
+            <button onclick="toggleMobileNav()" class="lg:hidden p-2 text-choupi-green">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
         </div>
 
-        <!-- Dropdown Mobile -->
-        <div id="mobile-nav" class="hidden lg:hidden bg-choupi-card border-b border-choupi-border px-6 pt-3 pb-6 space-y-3 font-medium text-sm">
-            <a href="#" onclick="showPage('qui-sommes-nous')" class="block py-1 text-choupi-brown">Qui sommes-nous ?</a>
-            <a href="#" onclick="showPage('propositions')" class="block py-1 text-choupi-brown">Nos propositions de garde</a>
-            <a href="#" onclick="showPage('engagements')" class="block py-1 text-choupi-brown">Nos engagements</a>
-            <a href="#" onclick="showPage('faq')" class="block py-1 text-choupi-brown">FAQ</a>
-            <a href="#" onclick="showPage('offres-emploi')" class="block py-1 text-choupi-brown">Nos offres d'emplois</a>
-            <a href="#" onclick="showPage('contact')" class="block py-1 text-choupi-green font-bold">Contact</a>
+        <div id="mobile-nav" class="hidden lg:hidden bg-white border-b border-choupi-border px-6 py-4 space-y-4 shadow-lg absolute w-full">
+            <a href="#" onclick="showPage('qui-sommes-nous')" class="block text-choupi-brown">Qui sommes-nous ?</a>
+            <a href="#" onclick="showPage('propositions')" class="block text-choupi-brown">Propositions de garde</a>
+            <a href="#" onclick="showPage('engagements')" class="block text-choupi-brown">Nos engagements</a>
+            <a href="#" onclick="showPage('faq')" class="block text-choupi-brown">FAQ</a>
+            <a href="#" onclick="showPage('contact')" class="block text-choupi-green font-medium">Nous contacter</a>
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
     <main class="relative z-10 flex-grow">
 
-        <!-- ================= PAGE 1 : ACCUEIL (PAGE MÈRE DE REDIRECTION) ================= -->
+        <!-- ================= ACCUEIL (PAGE MÈRE) ================= -->
         <section id="page-home" class="page-section active">
             
-            <!-- HERO SECTION -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 text-center">
-                <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-choupi-green mb-4 leading-tight">
-                    Garde d'enfants à <span class="text-choupi-terracotta">Toulouse</span> et alentours
+            <!-- Accroche -->
+            <div class="max-w-4xl mx-auto px-4 pt-16 pb-12 text-center">
+                <h1 class="font-heading text-4xl sm:text-5xl font-medium text-choupi-green mb-6 leading-tight">
+                    La garde d'enfants remplie de douceur à <span class="text-choupi-gold">Toulouse</span>
                 </h1>
-                
-                <p class="text-base sm:text-lg text-choupi-brown/80 max-w-2xl mx-auto mb-8 font-light">
-                    Des moments remplis de rires, de jeux et d'attention bienveillante adaptés à chacun de vos enfants.
+                <p class="text-lg text-choupi-brown/80 mb-10 leading-relaxed">
+                    Coucou ! Ici on rit, on joue et on grandit à son rythme. Je m'occupe de vos petits (et grands) trésors directement dans leur cocon familial, avec bienveillance et joie de vivre.
                 </p>
-
-                <!-- CTA MÈRE -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-                    <button onclick="showPage('composer')" class="w-full sm:w-auto px-8 py-3.5 bg-choupi-gold text-white font-bold rounded-full shadow-md hover:bg-choupi-gold/90 transition-transform active:scale-95 text-base">
-                        Composer la garde de mon/mes enfant(s)
-                    </button>
-                    <button onclick="showPage('propositions')" class="w-full sm:w-auto px-8 py-3.5 bg-white text-choupi-green font-bold border-2 border-choupi-green rounded-full hover:bg-choupi-green/10 transition-colors text-base">
-                        Découvrir nos activités
-                    </button>
-                </div>
-
-                <!-- BADGES RÉASSURANCE -->
-                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-semibold text-choupi-green">
-                    <span class="bg-white/90 backdrop-blur px-4 py-2 rounded-full border border-choupi-border shadow-sm flex items-center gap-2">
-                        <span class="text-choupi-gold">◆</span> À partir de 3 ans
-                    </span>
-                    <span class="bg-white/90 backdrop-blur px-4 py-2 rounded-full border border-choupi-border shadow-sm flex items-center gap-2">
-                        <span class="text-choupi-gold">◆</span> À domicile
-                    </span>
-                    <span class="bg-white/90 backdrop-blur px-4 py-2 rounded-full border border-choupi-border shadow-sm flex items-center gap-2">
-                        <span class="text-choupi-gold">◆</span> À partir de 20 € / heure
-                    </span>
-                    <span class="bg-white/90 backdrop-blur px-4 py-2 rounded-full border border-choupi-border shadow-sm flex items-center gap-2">
-                        <span class="text-choupi-gold">◆</span> Avance de crédit d'impôt
-                    </span>
-                </div>
-            </div>
-
-            <!-- HUB DE NAVIGATION COMPLET DE LA PAGE MÈRE -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div class="text-center mb-10">
-                    <span class="text-xs font-bold uppercase tracking-widest text-choupi-terracotta">Tout sur Choupigarde</span>
-                    <h2 class="font-heading text-2xl sm:text-3xl font-bold text-choupi-green">Explorez nos univers et services</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Carte 1 : Qui sommes-nous -->
-                    <div class="bg-white rounded-2xl p-6 border border-choupi-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-choupi-green/10 text-choupi-green flex items-center justify-center mb-4 text-xl">🌿</div>
-                            <h3 class="font-heading text-xl font-bold text-choupi-green mb-2">Qui sommes-nous ?</h3>
-                            <p class="text-xs sm:text-sm text-choupi-brown/80">Découvrez l'histoire de Choupigarde, nos valeurs et notre philosophie d'accompagnement à domicile.</p>
-                        </div>
-                        <button onclick="showPage('qui-sommes-nous')" class="mt-6 w-full py-2.5 border border-choupi-green text-choupi-green font-semibold text-xs uppercase tracking-wider rounded-xl hover:bg-choupi-green hover:text-white transition-colors">
-                            En savoir plus →
-                        </button>
-                    </div>
-
-                    <!-- Carte 2 : Nos Propositions -->
-                    <div class="bg-white rounded-2xl p-6 border border-choupi-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-choupi-gold/20 text-choupi-gold flex items-center justify-center mb-4 text-xl">🎨</div>
-                            <h3 class="font-heading text-xl font-bold text-choupi-green mb-2">Propositions de garde</h3>
-                            <p class="text-xs sm:text-sm text-choupi-brown/80">Activités ludiques, sorties, soutien scolaire et jeux créatifs adaptés au besoin de votre enfant.</p>
-                        </div>
-                        <button onclick="showPage('propositions')" class="mt-6 w-full py-2.5 border border-choupi-gold text-choupi-gold font-semibold text-xs uppercase tracking-wider rounded-xl hover:bg-choupi-gold hover:text-white transition-colors">
-                            Voir le détail →
-                        </button>
-                    </div>
-
-                    <!-- Carte 3 : Nos Engagements -->
-                    <div class="bg-white rounded-2xl p-6 border border-choupi-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-choupi-blue/20 text-choupi-blue flex items-center justify-center mb-4 text-xl">🛡️</div>
-                            <h3 class="font-heading text-xl font-bold text-choupi-green mb-2">Nos engagements</h3>
-                            <p class="text-xs sm:text-sm text-choupi-brown/80">Sécurité, régularité, avance immédiate du crédit d'impôt et suivi quotidien personnalisé.</p>
-                        </div>
-                        <button onclick="showPage('engagements')" class="mt-6 w-full py-2.5 border border-choupi-blue text-choupi-blue font-semibold text-xs uppercase tracking-wider rounded-xl hover:bg-choupi-blue hover:text-white transition-colors">
-                            Lire nos garanties →
-                        </button>
-                    </div>
-
-                    <!-- Carte 4 : Formulaire Multi-enfants -->
-                    <div class="bg-white rounded-2xl p-6 border-2 border-choupi-terracotta shadow-md hover:shadow-lg transition-all flex flex-col justify-between md:col-span-2 lg:col-span-2">
-                        <div>
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="bg-choupi-terracotta/10 text-choupi-terracotta font-bold text-xs px-3 py-1 rounded-full uppercase">Sur-Mesure</span>
-                                <span class="text-xs text-choupi-brown/60">Multi-enfants disponible</span>
-                            </div>
-                            <h3 class="font-heading text-2xl font-bold text-choupi-green mb-2">Demande de garde personnalisée</h3>
-                            <p class="text-sm text-choupi-brown/80">Renseignez un ou plusieurs enfants avec l'âge exact de chacun, leurs besoins spécifiques et votre rythme souhaité pour obtenir un devis gratuit.</p>
-                        </div>
-                        <button onclick="showPage('composer')" class="mt-6 w-full py-3 bg-choupi-terracotta text-white font-bold text-sm rounded-xl hover:bg-choupi-terracotta/90 transition-colors flex items-center justify-center gap-2">
-                            <span>Configurer ma demande multi-enfants</span>
-                            <span>→</span>
-                        </button>
-                    </div>
-
-                    <!-- Carte 5 : FAQ & Recrutement -->
-                    <div class="bg-white rounded-2xl p-6 border border-choupi-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-choupi-green/10 text-choupi-green flex items-center justify-center mb-4 text-xl">❓</div>
-                            <h3 class="font-heading text-xl font-bold text-choupi-green mb-2">FAQ & Recrutement</h3>
-                            <p class="text-xs sm:text-sm text-choupi-brown/80">Des réponses à vos questions courantes ou découvrez nos opportunités d'emploi.</p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 mt-6">
-                            <button onclick="showPage('faq')" class="py-2 border border-choupi-border text-choupi-brown font-medium text-xs rounded-lg hover:bg-choupi-bg">FAQ</button>
-                            <button onclick="showPage('offres-emploi')" class="py-2 border border-choupi-border text-choupi-brown font-medium text-xs rounded-lg hover:bg-choupi-bg">Emplois</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= PAGE 2 : QUI SOMMES-NOUS ? (SANS PHOTO) ================= -->
-        <section id="page-qui-sommes-nous" class="page-section max-w-4xl mx-auto px-4 py-12">
-            <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-choupi-border">
-                <div class="text-center mb-8">
-                    <span class="text-xs font-bold uppercase tracking-widest text-choupi-gold">À propos</span>
-                    <h1 class="font-heading text-3xl sm:text-4xl font-bold text-choupi-green">Qui sommes-nous ?</h1>
-                </div>
-
-                <div class="space-y-6 text-choupi-brown leading-relaxed font-light text-base">
-                    <p>
-                        <strong class="font-semibold text-choupi-green">Choupigarde</strong> est né d'un constat simple : la garde d'enfants à domicile doit être un prolongement naturel du foyer, apportant sécurité, sérénité et épanouissement.
-                    </p>
-                    <p>
-                        Nous intervenons auprès des familles situées à <strong class="font-semibold text-choupi-terracotta">Toulouse et dans un rayon de 20 km</strong>. Notre mission est d'assurer un accompagnement bienveillant et structuré dès l'âge de 3 ans, en respectant scrupuleusement les besoins, le rythme et la personnalité de chaque enfant.
-                    </p>
-                    <div class="p-6 bg-choupi-bg rounded-2xl border border-choupi-border my-6">
-                        <h3 class="font-heading font-bold text-choupi-green text-lg mb-2">Notre philosophie d'accompagnement :</h3>
-                        <ul class="space-y-2 text-sm">
-                            <li class="flex items-center gap-2"><span class="text-choupi-gold">✦</span> Respect absolu des habitudes de maison et du rythme biologique.</li>
-                            <li class="flex items-center gap-2"><span class="text-choupi-gold">✦</span> Équilibre entre moments d'autonomie, activités ludiques et suivi des devoirs.</li>
-                            <li class="flex items-center gap-2"><span class="text-choupi-gold">✦</span> Relation de confiance fluide et régulière avec les parents.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="mt-8 pt-6 border-t border-choupi-border flex justify-between items-center">
-                    <button onclick="showPage('home')" class="text-xs font-bold uppercase tracking-wider text-choupi-brown/60 hover:text-choupi-green">← Retour à l'accueil</button>
-                    <button onclick="showPage('composer')" class="px-6 py-2.5 bg-choupi-gold text-white font-bold rounded-xl text-sm hover:bg-choupi-gold/90">Faire une demande</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= PAGE 3 : PROPOSITIONS DE GARDE ================= -->
-        <section id="page-propositions" class="page-section max-w-6xl mx-auto px-4 py-12">
-            <div class="text-center mb-10">
-                <span class="text-xs font-bold uppercase tracking-widest text-choupi-gold">Activités & Formules</span>
-                <h1 class="font-heading text-3xl sm:text-4xl font-bold text-choupi-green">Nos propositions de garde</h1>
-                <p class="text-xs sm:text-sm text-choupi-brown/70 mt-2">Un accompagnement sur-mesure adaptable à tous les âges.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-2xl border border-choupi-border shadow-sm">
-                    <div class="text-3xl mb-3">🎨</div>
-                    <h3 class="font-heading font-bold text-xl text-choupi-green mb-2">Éveil & Créativité</h3>
-                    <p class="text-xs sm:text-sm text-choupi-brown/80 leading-relaxed mb-4">Dessin, bricolages, lecture d'histoires et activités manuelles pour stimuler l'imagination en toute sécurité.</p>
-                    <span class="text-xs font-semibold text-choupi-gold bg-choupi-gold/10 px-3 py-1 rounded-full">Tous âges</span>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl border border-choupi-border shadow-sm">
-                    <div class="text-3xl mb-3">📚</div>
-                    <h3 class="font-heading font-bold text-xl text-choupi-green mb-2">Devoirs & Méthode</h3>
-                    <p class="text-xs sm:text-sm text-choupi-brown/80 leading-relaxed mb-4">Soutien scolaire attentif, révisions des leçons et aide aux devoirs pour une fin de journée sereine.</p>
-                    <span class="text-xs font-semibold text-choupi-green bg-choupi-green/10 px-3 py-1 rounded-full">Primaire & Collège</span>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl border border-choupi-border shadow-sm">
-                    <div class="text-3xl mb-3">⚽</div>
-                    <h3 class="font-heading font-bold text-xl text-choupi-green mb-2">Plein Air & Détente</h3>
-                    <p class="text-xs sm:text-sm text-choupi-brown/80 leading-relaxed mb-4">Jeux de plein air au parc, accompagnement aux activités extra-scolaires et moments de décompression.</p>
-                    <span class="text-xs font-semibold text-choupi-blue bg-choupi-blue/10 px-3 py-1 rounded-full">Selon météo & envies</span>
-                </div>
-            </div>
-
-            <div class="mt-10 text-center">
-                <button onclick="showPage('composer')" class="px-8 py-3.5 bg-choupi-terracotta text-white font-bold rounded-full hover:bg-choupi-terracotta/90 transition-transform active:scale-95">
-                    Configurer une garde pour mon/mes enfant(s)
+                <button onclick="showPage('composer')" class="px-8 py-4 bg-choupi-gold text-white font-medium rounded-full shadow-sm hover:bg-[#d9a44c] hover:shadow-md transition-all text-lg transform hover:-translate-y-1">
+                    Créer notre garde sur-mesure
                 </button>
             </div>
+
+            <!-- Hub de Navigation (Où voulez-vous aller ?) -->
+            <div class="max-w-6xl mx-auto px-4 py-12">
+                <h2 class="font-heading text-2xl font-medium text-center text-choupi-brown mb-8">Découvrez notre univers</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <div onclick="showPage('qui-sommes-nous')" class="hover-card bg-white p-8 rounded-3xl border border-choupi-border cursor-pointer flex flex-col items-center text-center">
+                        <svg class="w-10 h-10 text-choupi-green mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h3 class="font-heading text-xl font-medium text-choupi-green mb-2">L'histoire d'Emma</h3>
+                        <p class="text-sm text-choupi-brown/70">Apprenez-en plus sur nos valeurs et notre approche unique de la garde.</p>
+                    </div>
+
+                    <div onclick="showPage('propositions')" class="hover-card bg-white p-8 rounded-3xl border border-choupi-border cursor-pointer flex flex-col items-center text-center">
+                        <svg class="w-10 h-10 text-choupi-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h3 class="font-heading text-xl font-medium text-choupi-gold mb-2">Nos activités</h3>
+                        <p class="text-sm text-choupi-brown/70">Bricolages, aide aux devoirs, sorties... à chaque âge son aventure !</p>
+                    </div>
+
+                    <div onclick="showPage('engagements')" class="hover-card bg-white p-8 rounded-3xl border border-choupi-border cursor-pointer flex flex-col items-center text-center">
+                        <svg class="w-10 h-10 text-choupi-blue mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        <h3 class="font-heading text-xl font-medium text-choupi-blue mb-2">Sérénité & Aides</h3>
+                        <p class="text-sm text-choupi-brown/70">Sécurité, confiance et avance immédiate du crédit d'impôt.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Mon Approche (4 étapes claires, icônes corrigées) -->
+            <div class="bg-white/50 py-16">
+                <div class="max-w-7xl mx-auto px-4">
+                    <h2 class="font-heading text-3xl font-medium text-center text-choupi-green mb-12">Un cocon douillet, des journées pleines de vie</h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="text-center p-4">
+                            <div class="w-16 h-16 mx-auto bg-choupi-green/10 text-choupi-green rounded-2xl flex items-center justify-center mb-4">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                            </div>
+                            <h3 class="font-heading font-medium text-lg text-choupi-green mb-2">Un vrai cocon</h3>
+                            <p class="text-sm text-choupi-brown/70">Votre enfant reste à la maison, entouré de ses repères et de ses doudous.</p>
+                        </div>
+                        
+                        <div class="text-center p-4">
+                            <div class="w-16 h-16 mx-auto bg-choupi-gold/10 text-choupi-gold rounded-2xl flex items-center justify-center mb-4">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                            </div>
+                            <h3 class="font-heading font-medium text-lg text-choupi-gold mb-2">Plein d'idées</h3>
+                            <p class="text-sm text-choupi-brown/70">Chaque moment est l'occasion d'une petite surprise créative ou ludique.</p>
+                        </div>
+
+                        <div class="text-center p-4">
+                            <div class="w-16 h-16 mx-auto bg-choupi-blue/10 text-choupi-blue rounded-2xl flex items-center justify-center mb-4">
+                                <!-- Icône corrigée, sans coupure -->
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            </div>
+                            <h3 class="font-heading font-medium text-lg text-choupi-blue mb-2">Un coup de pouce</h3>
+                            <p class="text-sm text-choupi-brown/70">Un accompagnement serein pour les devoirs, fini le stress du soir !</p>
+                        </div>
+
+                        <div class="text-center p-4">
+                            <div class="w-16 h-16 mx-auto bg-choupi-green/10 text-choupi-green rounded-2xl flex items-center justify-center mb-4">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <h3 class="font-heading font-medium text-lg text-choupi-green mb-2">Un lien de confiance</h3>
+                            <p class="text-sm text-choupi-brown/70">On discute ensemble de la journée et de ce dont votre enfant a besoin.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comment ça marche -->
+            <div class="max-w-5xl mx-auto px-4 py-16 border-t border-choupi-border/40">
+                <h2 class="font-heading text-2xl font-medium text-center text-choupi-brown mb-10">En pratique, comment on s'organise ?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <span class="text-3xl font-heading text-choupi-gold mb-2 block">1</span>
+                        <p class="text-sm font-medium mb-1">Vous m'écrivez</p>
+                        <p class="text-xs text-choupi-brown/70">Remplissez le petit questionnaire pour m'en dire plus sur vos besoins.</p>
+                    </div>
+                    <div>
+                        <span class="text-3xl font-heading text-choupi-blue mb-2 block">2</span>
+                        <p class="text-sm font-medium mb-1">On se rencontre</p>
+                        <p class="text-xs text-choupi-brown/70">Un premier échange chez vous pour faire connaissance en toute simplicité.</p>
+                    </div>
+                    <div>
+                        <span class="text-3xl font-heading text-choupi-green mb-2 block">3</span>
+                        <p class="text-sm font-medium mb-1">C'est parti !</p>
+                        <p class="text-xs text-choupi-brown/70">On valide les horaires, l'administratif, et l'aventure commence.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <!-- ================= PAGE 4 : COMPOSER LA GARDE (GESTION MULTI-ENFANTS) ================= -->
+        <!-- ================= QUI SOMMES-NOUS ================= -->
+        <section id="page-qui-sommes-nous" class="page-section max-w-3xl mx-auto px-4 py-12">
+            <div class="bg-white rounded-3xl p-10 shadow-sm border border-choupi-border text-center">
+                <h1 class="font-heading text-3xl font-medium text-choupi-green mb-6">Coucou, moi c'est Emma !</h1>
+                <div class="space-y-5 text-sm text-choupi-brown/80 leading-relaxed text-left">
+                    <p>
+                        Je suis super heureuse de vous accueillir dans l'univers de <strong class="text-choupi-green">Choupigarde</strong>. 
+                        Mon but ? Que la garde d'enfants à domicile devienne un moment de joie pour vos enfants, et une véritable bulle de sérénité pour vous.
+                    </p>
+                    <p>
+                        Forte d'une solide expérience de l'école primaire jusqu'au lycée, j'ai eu la chance d'accompagner des enfants d'âges très variés. C'est ce qui m'a appris que chaque enfant est unique, avec ses propres envies, son propre rythme et ses petits défis quotidiens.
+                    </p>
+                    <p>
+                        Avec Choupigarde, fini les gardes impersonnelles. On construit ensemble un cadre bienveillant, stimulant et sécurisant pour que vos enfants s'épanouissent, tout simplement.
+                    </p>
+                </div>
+                <button onclick="showPage('home')" class="mt-8 text-xs font-medium text-choupi-gold hover:underline">← Revenir à l'accueil</button>
+            </div>
+        </section>
+
+        <!-- ================= FORMULAIRE (COMPOSER LA GARDE) ================= -->
         <section id="page-composer" class="page-section max-w-4xl mx-auto px-4 py-12">
-            <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-md border border-choupi-border">
+            <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-sm border border-choupi-border">
                 <div class="text-center mb-8">
-                    <span class="text-xs font-bold uppercase tracking-widest text-choupi-terracotta">Formulaire Dynamique</span>
-                    <h1 class="font-heading text-2xl sm:text-3xl font-bold text-choupi-green">Composer la garde de vos enfants</h1>
-                    <p class="text-xs sm:text-sm text-choupi-brown/70 mt-1">Ajoutez autant d'enfants que nécessaire et spécifiez leurs caractéristiques.</p>
+                    <h1 class="font-heading text-3xl font-medium text-choupi-green">Créer notre garde sur-mesure</h1>
+                    <p class="text-sm text-choupi-brown/70 mt-2">Dites-m'en plus sur votre merveilleuse petite tribu !</p>
                 </div>
 
-                <form id="multi-child-form" onsubmit="handleFormSubmit(event)" class="space-y-8">
+                <form class="space-y-8" onsubmit="event.preventDefault(); alert('Super ! Votre demande a bien été envoyée. Je reviens vers vous très vite !'); showPage('home');">
                     
-                    <!-- CONTENEUR DES ENFANTS -->
-                    <div class="space-y-6">
-                        <div class="flex items-center justify-between border-b border-choupi-border pb-3">
-                            <h3 class="font-heading font-bold text-choupi-green text-lg">Enfant(s) à garder</h3>
-                            <button type="button" onclick="addChildCard()" class="px-3 py-1.5 bg-choupi-green/10 text-choupi-green font-bold text-xs rounded-lg hover:bg-choupi-green hover:text-white transition-colors flex items-center gap-1">
-                                <span>+ Ajouter un enfant</span>
-                            </button>
+                    <!-- Section Enfants -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b border-choupi-border pb-2">
+                            <h3 class="font-heading font-medium text-choupi-green text-lg">Vos enfants</h3>
+                            <button type="button" class="text-xs font-medium text-choupi-gold hover:underline">+ Ajouter un enfant</button>
                         </div>
-
-                        <!-- Liste des cartes enfants dynamiques -->
-                        <div id="children-list" class="space-y-4">
-                            <!-- Injected dynamically via JS -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#FAF7F2] p-4 rounded-2xl">
+                            <div>
+                                <label class="block text-xs font-medium text-choupi-brown mb-1">Prénom / Surnom</label>
+                                <input type="text" placeholder="Ex: Léo" class="w-full bg-white border border-choupi-border/50 rounded-xl p-2.5 text-sm focus:outline-none focus:border-choupi-gold">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-choupi-brown mb-1">Âge (à partir de 3 ans)</label>
+                                <input type="number" min="3" placeholder="Ex: 5" class="w-full bg-white border border-choupi-border/50 rounded-xl p-2.5 text-sm focus:outline-none focus:border-choupi-gold">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-xs font-medium text-choupi-brown mb-1">Ce qu'il/elle aime, ses besoins particuliers...</label>
+                                <textarea rows="2" placeholder="Adore dessiner, a besoin d'aide en lecture..." class="w-full bg-white border border-choupi-border/50 rounded-xl p-2.5 text-sm focus:outline-none focus:border-choupi-gold"></textarea>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- RYTHME & COMMUNE -->
+                    <!-- Type de Garde : SÉPARATION CLAIRE DEMANDÉE -->
+                    <div class="space-y-3 pt-2">
+                        <h3 class="font-heading font-medium text-choupi-green text-lg">Type de besoin</h3>
+                        <div class="flex flex-wrap gap-4">
+                            <label class="flex items-center gap-2 cursor-pointer bg-[#FAF7F2] px-4 py-2 rounded-xl border border-choupi-border hover:border-choupi-gold transition-colors">
+                                <input type="radio" name="type_garde" value="regulier" class="accent-choupi-gold w-4 h-4" checked>
+                                <span class="text-sm font-medium">Régulier (Toute l'année)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer bg-[#FAF7F2] px-4 py-2 rounded-xl border border-choupi-border hover:border-choupi-gold transition-colors">
+                                <input type="radio" name="type_garde" value="ponctuel" class="accent-choupi-gold w-4 h-4">
+                                <span class="text-sm font-medium">Ponctuel (Soirées, imprévus)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer bg-[#FAF7F2] px-4 py-2 rounded-xl border border-choupi-border hover:border-choupi-gold transition-colors">
+                                <input type="radio" name="type_garde" value="vacances" class="accent-choupi-gold w-4 h-4">
+                                <span class="text-sm font-medium">Vacances scolaires</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Horaires et contact -->
                     <div class="space-y-4 pt-4 border-t border-choupi-border">
-                        <h3 class="font-heading font-bold text-choupi-green text-lg">Votre besoin global</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-bold uppercase text-choupi-brown mb-1">Commune d'intervention</label>
-                                <input type="text" required placeholder="Ex: Toulouse, Saint-Lys, Colomiers..." class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
+                                <label class="block text-xs font-medium text-choupi-brown mb-1">Votre nom</label>
+                                <input type="text" class="w-full bg-[#FAF7F2] border border-choupi-border rounded-xl p-2.5 text-sm focus:outline-none focus:border-choupi-gold">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold uppercase text-choupi-brown mb-1">Volume horaire hebdomadaire estimé</label>
-                                <input type="text" placeholder="Ex: 6h / semaine (Mardi & Jeudi)" class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
+                                <label class="block text-xs font-medium text-choupi-brown mb-1">Votre E-mail</label>
+                                <input type="email" class="w-full bg-[#FAF7F2] border border-choupi-border rounded-xl p-2.5 text-sm focus:outline-none focus:border-choupi-gold">
                             </div>
                         </div>
                     </div>
 
-                    <!-- COORDONNÉES ET CONTACT EMAIL -->
-                    <div class="space-y-4 pt-4 border-t border-choupi-border">
-                        <h3 class="font-heading font-bold text-choupi-green text-lg">Vos coordonnées (Réponse par e-mail)</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-bold uppercase text-choupi-brown mb-1">Nom complet</label>
-                                <input type="text" required placeholder="Votre nom" class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold uppercase text-choupi-brown mb-1">Adresse e-mail de contact</label>
-                                <input type="email" required placeholder="votre.email@exemple.fr" class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="w-full py-4 bg-choupi-gold text-white font-bold rounded-xl shadow hover:bg-choupi-gold/90 transition-transform active:scale-95 text-base">
-                        Envoyer ma demande pour étude
+                    <button type="submit" class="w-full py-4 bg-choupi-gold text-white font-medium rounded-xl shadow-sm hover:bg-[#d9a44c] transition-colors text-base mt-4">
+                        Envoyer ma demande à Emma
                     </button>
                 </form>
             </div>
         </section>
 
-        <!-- ================= PAGE 5 : ENGAGEMENTS ================= -->
-        <section id="page-engagements" class="page-section max-w-4xl mx-auto px-4 py-12">
-            <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-choupi-border">
-                <div class="text-center mb-8">
-                    <span class="text-xs font-bold uppercase tracking-widest text-choupi-blue">Sécurité & Qualité</span>
-                    <h1 class="font-heading text-3xl font-bold text-choupi-green">Nos Engagements</h1>
-                </div>
-
-                <div class="space-y-6">
-                    <div class="flex gap-4 items-start">
-                        <div class="w-8 h-8 rounded-full bg-choupi-green/20 text-choupi-green font-bold flex items-center justify-center shrink-0">✓</div>
-                        <div>
-                            <h3 class="font-heading font-bold text-lg text-choupi-green">Avance immédiate du crédit d'impôt (50%)</h3>
-                            <p class="text-xs sm:text-sm text-choupi-brown/80 mt-1">Vous ne payez directement que la moitié de la facture grâce au dispositif CESU / Urssaf.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-4 items-start">
-                        <div class="w-8 h-8 rounded-full bg-choupi-gold/20 text-choupi-gold font-bold flex items-center justify-center shrink-0">✓</div>
-                        <div>
-                            <h3 class="font-heading font-bold text-lg text-choupi-green">Intervenante unique et qualifiée</h3>
-                            <p class="text-xs sm:text-sm text-choupi-brown/80 mt-1">Un cadre stable et rassurant pour créer des habitudes saines à domicile.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Pages secondaires simplifiées pour la démonstration du flux -->
+        <section id="page-propositions" class="page-section max-w-4xl mx-auto px-4 py-12 text-center">
+            <h1 class="font-heading text-3xl font-medium text-choupi-green mb-6">Nos activités</h1>
+            <p class="text-sm text-choupi-brown/80 mb-6">La page d'activités détaillera ici tout ce que nous pourrons faire ensemble : lectures, peinture, devoirs ou chasses au trésor !</p>
+            <button onclick="showPage('home')" class="text-sm font-medium text-choupi-gold hover:underline">Retour à l'accueil</button>
         </section>
 
-        <!-- ================= PAGE 6 : FAQ ================= -->
-        <section id="page-faq" class="page-section max-w-4xl mx-auto px-4 py-12">
-            <div class="text-center mb-8">
-                <span class="text-xs font-bold uppercase tracking-widest text-choupi-gold">Questions fréquentes</span>
-                <h1 class="font-heading text-3xl font-bold text-choupi-green">Foire Aux Questions</h1>
-            </div>
-
-            <div class="space-y-4">
-                <details class="bg-white rounded-2xl p-5 border border-choupi-border shadow-sm group">
-                    <summary class="font-heading font-bold text-choupi-green cursor-pointer flex justify-between items-center">
-                        Comment faire une demande pour plusieurs enfants ?
-                        <span class="text-choupi-gold font-bold transition-transform group-open:rotate-180">↓</span>
-                    </summary>
-                    <p class="text-xs sm:text-sm text-choupi-brown/80 mt-3 pt-3 border-t border-choupi-border">
-                        Dans notre formulaire dédié, vous pouvez cliquer sur "+ Ajouter un enfant" afin de spécifier l'âge exact et les besoins particuliers de chaque membre de la fratrie.
-                    </p>
-                </details>
-
-                <details class="bg-white rounded-2xl p-5 border border-choupi-border shadow-sm group">
-                    <summary class="font-heading font-bold text-choupi-green cursor-pointer flex justify-between items-center">
-                        Comment s'effectue la prise de contact ?
-                        <span class="text-choupi-gold font-bold transition-transform group-open:rotate-180">↓</span>
-                    </summary>
-                    <p class="text-xs sm:text-sm text-choupi-brown/80 mt-3 pt-3 border-t border-choupi-border">
-                        Toutes les prises de contact se font par e-mail ou via nos formulaires. Nous étudions vos besoins et revenons vers vous avec une estimation sur-mesure.
-                    </p>
-                </details>
-            </div>
+        <section id="page-engagements" class="page-section max-w-4xl mx-auto px-4 py-12 text-center">
+            <h1 class="font-heading text-3xl font-medium text-choupi-blue mb-6">Nos engagements</h1>
+            <p class="text-sm text-choupi-brown/80 mb-6">Cette section vous expliquera en toute transparence comment fonctionne l'avance immédiate de crédit d'impôt.</p>
+            <button onclick="showPage('home')" class="text-sm font-medium text-choupi-gold hover:underline">Retour à l'accueil</button>
         </section>
 
-        <!-- ================= PAGE 7 : RECRUTEMENT ================= -->
-        <section id="page-offres-emploi" class="page-section max-w-3xl mx-auto px-4 py-12">
-            <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-choupi-border text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-choupi-gold">Rejoignez-nous</span>
-                <h1 class="font-heading text-3xl font-bold text-choupi-green mb-4">Nos offres d'emplois</h1>
-                <p class="text-xs sm:text-sm text-choupi-brown/80 max-w-lg mx-auto mb-8 leading-relaxed">
-                    Vous possédez de l'expérience dans la garde d'enfants à domicile et souhaitez intervenir sur la région toulousaine ? Contactez-nous par e-mail avec votre CV.
-                </p>
-                <a href="mailto:emmacostespro@gmail.com?subject=Candidature%20Choupigarde" class="inline-block px-8 py-3.5 bg-choupi-green text-white font-bold rounded-full hover:bg-choupi-green/90 transition-colors text-sm">
-                    Envoyer ma candidature par e-mail
-                </a>
-            </div>
+        <section id="page-faq" class="page-section max-w-4xl mx-auto px-4 py-12 text-center">
+            <h1 class="font-heading text-3xl font-medium text-choupi-green mb-6">Une question ?</h1>
+            <p class="text-sm text-choupi-brown/80 mb-6">Ici, vous retrouverez toutes les réponses aux questions que les parents se posent le plus souvent.</p>
+            <button onclick="showPage('home')" class="text-sm font-medium text-choupi-gold hover:underline">Retour à l'accueil</button>
         </section>
 
-        <!-- ================= PAGE 8 : CONTACT (UNIQUEMENT EMAIL) ================= -->
-        <section id="page-contact" class="page-section max-w-3xl mx-auto px-4 py-12">
-            <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-md border border-choupi-border text-center">
-                <span class="text-xs font-bold uppercase tracking-widest text-choupi-gold">Contact Direct</span>
-                <h1 class="font-heading text-3xl font-bold text-choupi-green mb-3">Écrivez-nous</h1>
-                <p class="text-xs sm:text-sm text-choupi-brown/80 max-w-md mx-auto mb-8">
-                    Pour toute question ou demande spécifique, notre équipe est joignable directement par courrier électronique.
-                </p>
-
-                <div class="max-w-md mx-auto mb-6">
-                    <a href="mailto:emmacostespro@gmail.com" class="w-full py-4 bg-choupi-gold text-white font-bold rounded-2xl shadow hover:bg-choupi-gold/90 transition-all flex items-center justify-center gap-2 text-base">
-                        <span>✉️</span>
-                        <span>emmacostespro@gmail.com</span>
-                    </a>
-                </div>
-
-                <p class="text-xs text-choupi-brown/50">Secteur : Toulouse et communes environnantes (~20 km).</p>
-            </div>
+        <section id="page-contact" class="page-section max-w-3xl mx-auto px-4 py-12 text-center">
+            <h1 class="font-heading text-3xl font-medium text-choupi-green mb-6">Contactez-nous</h1>
+            <p class="text-sm text-choupi-brown/80 mb-8">Pour toute demande directe, un petit e-mail suffit !</p>
+            <a href="mailto:emmacostespro@gmail.com" class="inline-block px-8 py-3 bg-choupi-green text-white font-medium rounded-full shadow hover:bg-[#7a8c6a] transition-colors">
+                emmacostespro@gmail.com
+            </a>
         </section>
-
     </main>
 
-    <!-- FOOTER -->
-    <footer class="relative z-20 bg-white border-t border-choupi-border py-8 text-center text-xs text-choupi-brown/70">
-        <div class="max-w-7xl mx-auto px-4 space-y-2">
-            <p class="font-heading font-bold text-sm text-choupi-green">Choupigarde</p>
-            <p>Service de garde d'enfants à domicile – Toulouse et ses alentours</p>
-            <p class="text-choupi-gold font-medium">À très vite !</p>
-        </div>
+    <footer class="relative z-20 bg-white border-t border-choupi-border/50 py-6 text-center text-xs text-choupi-brown/60">
+        <p class="font-heading text-sm text-choupi-green mb-1">Choupigarde</p>
+        <p>Des moments doux à domicile – Région Toulousaine</p>
     </footer>
 
-    <!-- JAVASCRIPT & LOGIQUE DYNAMIQUE -->
     <script>
-        let childCount = 0;
-
-        // Navigation SPA
+        // Logique de navigation avec animation fluide
         function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-            const target = document.getElementById('page-' + pageId);
-            if (target) target.classList.add('active');
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(sec => {
+                sec.classList.remove('active');
+            });
+            setTimeout(() => {
+                const target = document.getElementById('page-' + pageId);
+                if (target) target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 50); // Léger délai pour relancer l'animation
+            
             document.getElementById('mobile-nav').classList.add('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleMobileNav() {
             document.getElementById('mobile-nav').classList.toggle('hidden');
         }
-
-        // Ajout dynamique d'une carte enfant
-        function addChildCard() {
-            childCount++;
-            const container = document.getElementById('children-list');
-            
-            const card = document.createElement('div');
-            card.id = `child-card-${childCount}`;
-            card.className = "bg-choupi-bg p-5 rounded-2xl border border-choupi-border space-y-4 relative transition-all";
-            
-            card.innerHTML = `
-                <div class="flex items-center justify-between border-b border-choupi-border/60 pb-2">
-                    <span class="font-heading font-bold text-choupi-green text-sm">Enfant #${childCount}</span>
-                    ${childCount > 1 ? `<button type="button" onclick="removeChildCard(${childCount})" class="text-xs text-red-500 font-semibold hover:underline">Supprimer</button>` : ''}
-                </div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-choupi-brown mb-1">Prénom ou Surnom</label>
-                        <input type="text" placeholder="Ex: Lucas" required class="w-full bg-white border border-choupi-border rounded-xl p-2.5 text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-choupi-brown mb-1">Âge exact (ex: 4 ans, 8 ans)</label>
-                        <input type="number" min="3" max="18" placeholder="Ex: 5" required class="w-full bg-white border border-choupi-border rounded-xl p-2.5 text-sm">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold uppercase text-choupi-brown mb-1">Besoins particuliers / Activités souhaitées</label>
-                    <textarea rows="2" placeholder="Ex: Aide aux devoirs de primaire, jeux créatifs, sorties au parc..." class="w-full bg-white border border-choupi-border rounded-xl p-2.5 text-sm"></textarea>
-                </div>
-            `;
-            
-            container.appendChild(card);
-        }
-
-        function removeChildCard(id) {
-            const card = document.getElementById(`child-card-${id}`);
-            if (card) card.remove();
-        }
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            alert("Votre demande pour votre/vos enfant(s) a bien été envoyée. Nous vous répondrons très rapidement par e-mail !");
-            showPage('home');
-        }
-
-        // Initialisation : au moins 1 enfant au chargement
-        window.addEventListener('DOMContentLoaded', () => {
-            addChildCard();
-        });
     </script>
 </body>
 </html>
