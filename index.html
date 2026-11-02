@@ -46,7 +46,7 @@
             font-family: 'Fredoka', sans-serif;
         }
 
-        /* Ballons pastel ultra-discrets */
+        /* Ballons pastel ultra-discrets en arrière-plan */
         .balloon {
             position: absolute;
             bottom: -120px;
@@ -67,12 +67,13 @@
         .b-3 { left: 62%; animation-duration: 40s; animation-delay: 1s; }
         .b-4 { left: 84%; animation-duration: 35s; animation-delay: 6s; }
 
-        /* Animation des pages SPA */
+        /* Animation de transition fluide entre les pages SPA */
         .page-section {
             display: none;
             opacity: 0;
-            transform: translateY(12px);
-            transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+            transform: translateY(16px);
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
         .page-section.active {
             display: block;
@@ -88,6 +89,11 @@
             transform: translateY(-5px);
             box-shadow: 0 12px 24px -6px rgba(73, 53, 43, 0.08);
             border-color: #EAB65C;
+        }
+
+        /* Bouton flottant d'action rapide */
+        #floating-cta {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Scrollbar épurée */
@@ -226,11 +232,11 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-choupi-bg p-5 rounded-2xl border border-choupi-border text-center">
                             <div>
-                                <span class="text-xs text-choupi-brown/60 uppercase block font-semibold">Tarif Brut de base</span>
+                                <span class="text-xs text-choupi-brown/60 uppercase block font-semibold">Tarif brut de base</span>
                                 <span id="gross-cost" class="font-heading text-2xl font-medium text-choupi-brown">80 € / sem.</span>
                             </div>
                             <div class="border-t sm:border-t-0 sm:border-l border-choupi-border pt-3 sm:pt-0">
-                                <span class="text-xs text-choupi-green uppercase block font-semibold">Après Crédit d'Impôt (-50%)</span>
+                                <span class="text-xs text-choupi-green uppercase block font-semibold">Après crédit d'impôt (-50%)</span>
                                 <span id="net-cost" class="font-heading text-2xl font-medium text-choupi-green">40 € / sem.</span>
                             </div>
                         </div>
@@ -245,7 +251,7 @@
             <!-- Hub de Navigation -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div class="text-center mb-8">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-choupi-terracotta">Navigation Fluide</span>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-choupi-terracotta">Navigation fluide</span>
                     <h2 class="font-heading text-2xl sm:text-3xl font-medium text-choupi-green">Explorez nos univers</h2>
                 </div>
 
@@ -289,7 +295,7 @@
             <div class="bg-white/60 py-14 border-y border-choupi-border/50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-10">
-                        <span class="text-xs font-semibold uppercase tracking-widest text-choupi-gold">Mon Approche</span>
+                        <span class="text-xs font-semibold uppercase tracking-widest text-choupi-gold">Mon approche</span>
                         <h2 class="font-heading text-2xl sm:text-3xl font-medium text-choupi-green mt-1">Un cocon douillet, des journées pleines de vie</h2>
                     </div>
 
@@ -345,7 +351,7 @@
 
                     <div class="relative">
                         <div class="w-14 h-14 bg-choupi-goldLight text-choupi-gold font-heading font-medium text-xl rounded-full flex items-center justify-center mx-auto mb-4">2</div>
-                        <h3 class="font-heading font-medium text-lg text-choupi-brown mb-2">Premier échange & Rencontre</h3>
+                        <h3 class="font-heading font-medium text-lg text-choupi-brown mb-2">Premier échange & rencontre</h3>
                         <p class="text-xs sm:text-sm text-choupi-brown/70">Un premier contact par e-mail suivi d'un rendez-vous chez vous pour faire connaissance.</p>
                     </div>
 
@@ -357,13 +363,102 @@
                 </div>
             </div>
 
+            <!-- CHRONOLOGIE : UNE FIN DE JOURNÉE TYPE -->
+            <div class="bg-white/60 py-16 border-t border-choupi-border/50">
+                <div class="max-w-5xl mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <span class="text-xs font-semibold uppercase tracking-widest text-choupi-gold">En pratique</span>
+                        <h2 class="font-heading text-2xl sm:text-3xl font-medium text-choupi-green mt-1">Une fin de journée type chez Choupigarde</h2>
+                        <p class="text-xs sm:text-sm text-choupi-brown/70 mt-1">Découvrez l'enchaînement fluide et équilibré d'un accompagnement à domicile.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-white p-5 rounded-2xl border border-choupi-border relative">
+                            <span class="bg-choupi-greenLight text-choupi-green font-heading text-xs font-semibold px-2.5 py-1 rounded-md inline-block mb-3">16h30 - 17h00</span>
+                            <h3 class="font-heading font-medium text-base text-choupi-brown mb-1">Retrouvailles & goûter</h3>
+                            <p class="text-xs text-choupi-brown/70 leading-relaxed">Retour à la maison, lavage des mains, pause gourmande et petit échange sur le déroulé de la journée.</p>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-choupi-border relative">
+                            <span class="bg-choupi-goldLight text-choupi-gold font-heading text-xs font-semibold px-2.5 py-1 rounded-md inline-block mb-3">17h00 - 17h45</span>
+                            <h3 class="font-heading font-medium text-base text-choupi-brown mb-1">Devoirs & leçons</h3>
+                            <p class="text-xs text-choupi-brown/70 leading-relaxed">Mise au calme, révisions méthodiques des devoirs et apprentissage des leçons sans précipitations.</p>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-choupi-border relative">
+                            <span class="bg-choupi-blueLight text-choupi-blue font-heading text-xs font-semibold px-2.5 py-1 rounded-md inline-block mb-3">17h45 - 18h30</span>
+                            <h3 class="font-heading font-medium text-base text-choupi-brown mb-1">Détente & ateliers</h3>
+                            <p class="text-xs text-choupi-brown/70 leading-relaxed">Activités créatives, bricolage, jeux de société ou lecture partagée selon les envies de l'enfant.</p>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-choupi-border relative">
+                            <span class="bg-choupi-greenLight text-choupi-green font-heading text-xs font-semibold px-2.5 py-1 rounded-md inline-block mb-3">18h30 - 19h00</span>
+                            <h3 class="font-heading font-medium text-base text-choupi-brown mb-1">Passage de relais</h3>
+                            <p class="text-xs text-choupi-brown/70 leading-relaxed">Rangement des jeux et rapide compte-rendu oral aux parents dès leur retour du travail.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VÉRIFICATEUR DE COMMUNE D'INTERVENTION -->
+            <div class="max-w-3xl mx-auto px-4 py-12">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-choupi-border text-center shadow-sm">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-choupi-terracotta">Secteur d'intervention</span>
+                    <h2 class="font-heading text-2xl font-medium text-choupi-green mt-1 mb-2">Vérifiez si nous intervenons chez vous</h2>
+                    <p class="text-xs sm:text-sm text-choupi-brown/70 mb-6">Saisissez votre commune pour vous assurer de notre présence dans votre secteur (Toulouse et ~20 km alentours).</p>
+
+                    <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-4">
+                        <input type="text" id="town-search-input" placeholder="Ex: Toulouse, Tournefeuille, Saint-Lys..." oninput="resetTownCoverage()" onkeydown="if(event.key==='Enter'){event.preventDefault();checkTownCoverage();}" class="flex-grow bg-choupi-bg border border-choupi-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-choupi-gold">
+                        <button type="button" onclick="checkTownCoverage()" class="px-6 py-3 bg-choupi-gold text-white font-medium text-sm rounded-xl hover:bg-choupi-gold/90 transition-colors">
+                            Vérifier
+                        </button>
+                    </div>
+
+                    <div id="town-search-result" class="text-xs sm:text-sm font-medium transition-all min-h-[24px]"></div>
+                </div>
+            </div>
+
+            <!-- RETOURS DE PARENTS / TÉMOIGNAGES -->
+            <div class="max-w-6xl mx-auto px-4 py-12 border-t border-choupi-border/40">
+                <div class="text-center mb-10">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-choupi-gold">Confiance</span>
+                    <h2 class="font-heading text-2xl sm:text-3xl font-medium text-choupi-green mt-1">Ce que disent les familles</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-3xl border border-choupi-border shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-choupi-gold gap-1 text-sm mb-3">★★★★★</div>
+                            <p class="text-xs sm:text-sm text-choupi-brown/80 italic leading-relaxed mb-4">« Quel soulagement pour les devoirs du soir ! Le retour à la maison se fait désormais dans la sérénité et mes enfants l'attendent toujours avec joie. »</p>
+                        </div>
+                        <span class="text-xs font-semibold text-choupi-green">— Marine H., maman à Colomiers</span>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-3xl border border-choupi-border shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-choupi-gold gap-1 text-sm mb-3">★★★★★</div>
+                            <p class="text-xs sm:text-sm text-choupi-brown/80 italic leading-relaxed mb-4">« Un accompagnement d'une grande bienveillance. Le crédit d'impôt immédiat simplifie énormément la gestion du budget au mois le mois. »</p>
+                        </div>
+                        <span class="text-xs font-semibold text-choupi-green">— Thomas B., papa à Toulouse</span>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-3xl border border-choupi-border shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-choupi-gold gap-1 text-sm mb-3">★★★★★</div>
+                            <p class="text-xs sm:text-sm text-choupi-brown/80 italic leading-relaxed mb-4">« Très professionnelle et toujours ponctuelle. Les enfants apprécient particulièrement les ateliers créatifs et les temps de jeu après l'école. »</p>
+                        </div>
+                        <span class="text-xs font-semibold text-choupi-green">— Sophie M., maman à Saint-Lys</span>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <!-- ================= QUI SOMMES-NOUS ? ================= -->
         <section id="page-qui-sommes-nous" class="page-section max-w-4xl mx-auto px-4 py-12">
             <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-choupi-border">
                 <div class="text-center mb-8">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-choupi-gold">Notre Vision</span>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-choupi-gold">Notre vision</span>
                     <h1 class="font-heading text-3xl font-medium text-choupi-green mt-1">Qui sommes-nous ?</h1>
                 </div>
 
@@ -395,18 +490,10 @@
 
         <!-- ================= PROPOSITIONS DE GARDE ================= -->
         <section id="page-propositions" class="page-section max-w-6xl mx-auto px-4 py-12">
-            <div class="text-center mb-8">
-                <span class="text-xs font-semibold uppercase tracking-widest text-choupi-gold">Nos Pôles d'Activités</span>
+            <div class="text-center mb-10">
+                <span class="text-xs font-semibold uppercase tracking-widest text-choupi-gold">Nos formules & activités</span>
                 <h1 class="font-heading text-3xl font-medium text-choupi-green mt-1">Nos propositions de garde</h1>
                 <p class="text-xs sm:text-sm text-choupi-brown/70 mt-2">Des formules pensées autour des besoins et de la personnalité de votre enfant.</p>
-            </div>
-
-            <!-- Filtres interactifs par thématique -->
-            <div class="flex justify-center gap-2 sm:gap-4 mb-8 flex-wrap">
-                <button onclick="filterActivities('all')" class="activity-filter-btn active px-4 py-2 bg-choupi-gold text-white font-medium text-xs rounded-full border border-choupi-gold shadow-sm">Toutes les activités</button>
-                <button onclick="filterActivities('eveil')" class="activity-filter-btn px-4 py-2 bg-white text-choupi-brown font-medium text-xs rounded-full border border-choupi-border hover:border-choupi-gold">Éveil & Créativité</button>
-                <button onclick="filterActivities('devoirs')" class="activity-filter-btn px-4 py-2 bg-white text-choupi-brown font-medium text-xs rounded-full border border-choupi-border hover:border-choupi-gold">Soutien & Devoirs</button>
-                <button onclick="filterActivities('autonomie')" class="activity-filter-btn px-4 py-2 bg-white text-choupi-brown font-medium text-xs rounded-full border border-choupi-border hover:border-choupi-gold">Autonomie & Projets</button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -416,7 +503,7 @@
                         <div class="w-12 h-12 rounded-2xl bg-choupi-goldLight text-choupi-gold flex items-center justify-center mb-4">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                         </div>
-                        <h3 class="font-heading font-medium text-xl text-choupi-green mb-2">Éveil & Activités manuelles</h3>
+                        <h3 class="font-heading font-medium text-xl text-choupi-green mb-2">Éveil & activités manuelles</h3>
                         <p class="text-xs sm:text-sm text-choupi-brown/70 mb-4 leading-relaxed">Bricolage, dessin, découvertes sensorielles, contes et temps calme pour développer l'imagination.</p>
                         <ul class="space-y-2 text-xs text-choupi-brown/80 mb-6">
                             <li>✦ Créations artistiques adaptées</li>
@@ -434,7 +521,7 @@
                         <div class="w-12 h-12 rounded-2xl bg-choupi-greenLight text-choupi-green flex items-center justify-center mb-4">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
                         </div>
-                        <h3 class="font-heading font-medium text-xl text-choupi-green mb-2">Devoirs & Méthodologie</h3>
+                        <h3 class="font-heading font-medium text-xl text-choupi-green mb-2">Devoirs & méthodologie</h3>
                         <p class="text-xs sm:text-sm text-choupi-brown/70 mb-4 leading-relaxed">Suivi méthodique des devoirs scolaires, organisation des apprentissages et soutien personnalisé.</p>
                         <ul class="space-y-2 text-xs text-choupi-brown/80 mb-6">
                             <li>✦ Révisions quotidiennes structurées</li>
@@ -451,7 +538,7 @@
                         <div class="w-12 h-12 rounded-2xl bg-choupi-blueLight text-choupi-blue flex items-center justify-center mb-4">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         </div>
-                        <h3 class="font-heading font-medium text-xl text-choupi-green mb-2">Autonomie & Encadrement</h3>
+                        <h3 class="font-heading font-medium text-xl text-choupi-green mb-2">Autonomie & encadrement</h3>
                         <p class="text-xs sm:text-sm text-choupi-brown/70 mb-4 leading-relaxed">Présence rassurante, suivi des activités extra-scolaires et soutien dans la gestion du travail personnel.</p>
                         <ul class="space-y-2 text-xs text-choupi-brown/80 mb-6">
                             <li>✦ Accompagnement aux activités extérieures</li>
@@ -468,7 +555,7 @@
         <section id="page-composer" class="page-section max-w-4xl mx-auto px-4 py-12">
             <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-md border border-choupi-border">
                 <div class="text-center mb-8">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-choupi-terracotta">Sur-Mesure</span>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-choupi-terracotta">Sur-mesure</span>
                     <h1 class="font-heading text-2xl sm:text-3xl font-medium text-choupi-green mt-1">Composez la garde de vos enfants</h1>
                     <p class="text-xs sm:text-sm text-choupi-brown/70 mt-1">Renseignez vos enfants et leurs besoins spécifiques pour recevoir une offre adaptée.</p>
                 </div>
@@ -489,24 +576,24 @@
                         </div>
                     </div>
 
-                    <!-- SEPARATION DES HORAIRES (EXIGENCE REQUIS) -->
+                    <!-- SÉPARATION DES HORAIRES ENVISAGÉS -->
                     <div class="pt-4 border-t border-choupi-border space-y-4">
-                        <h3 class="font-heading font-medium text-choupi-green text-lg">Type de besoin & Horaires envisagés</h3>
+                        <h3 class="font-heading font-medium text-choupi-green text-lg">Type de besoin et horaires envisagés</h3>
                         
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             <label class="cursor-pointer border border-choupi-border rounded-xl p-3 bg-choupi-bg hover:border-choupi-gold transition-colors flex items-center gap-2">
                                 <input type="radio" name="type_besoin" value="regulier" class="accent-choupi-gold" checked>
-                                <span class="text-xs sm:text-sm font-medium">Garde Régulière</span>
+                                <span class="text-xs sm:text-sm font-medium">Garde régulière</span>
                             </label>
 
                             <label class="cursor-pointer border border-choupi-border rounded-xl p-3 bg-choupi-bg hover:border-choupi-gold transition-colors flex items-center gap-2">
                                 <input type="radio" name="type_besoin" value="ponctuel" class="accent-choupi-gold">
-                                <span class="text-xs sm:text-sm font-medium">Garde Ponctuelle</span>
+                                <span class="text-xs sm:text-sm font-medium">Garde ponctuelle</span>
                             </label>
 
                             <label class="cursor-pointer border border-choupi-border rounded-xl p-3 bg-choupi-bg hover:border-choupi-gold transition-colors flex items-center gap-2">
                                 <input type="radio" name="type_besoin" value="vacances" class="accent-choupi-gold">
-                                <span class="text-xs sm:text-sm font-medium">Vacances Scolaires</span>
+                                <span class="text-xs sm:text-sm font-medium">Vacances scolaires</span>
                             </label>
                         </div>
 
@@ -516,9 +603,21 @@
                                 <input type="text" required placeholder="Ex: Toulouse, Saint-Lys, Colomiers..." class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold uppercase text-choupi-brown mb-1">Volume horaire estimé</label>
-                                <input type="text" placeholder="Ex: 5h par semaine (Lundi & Jeudi)" class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
+                                <label class="block text-xs font-semibold uppercase text-choupi-brown mb-1">Volume d'heures estimé / semaine</label>
+                                <input type="number" id="hours-per-week" min="1" max="40" placeholder="Ex: 4" oninput="updateCalculatedEstimate()" class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- CARTE RECAPITULATIVE INSTANTANÉE -->
+                    <div class="bg-choupi-bg p-5 rounded-2xl border border-choupi-border flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="text-center sm:text-left">
+                            <span class="text-xs font-semibold uppercase text-choupi-brown/60 block">Estimation hebdomadaire</span>
+                            <span id="form-summary-text" class="text-sm font-medium text-choupi-brown">4 heures de garde par semaine</span>
+                        </div>
+                        <div class="text-center sm:text-right">
+                            <span class="text-xs font-semibold uppercase text-choupi-green block">Reste à charge après crédit d'impôt</span>
+                            <span id="form-summary-price" class="font-heading text-xl font-medium text-choupi-green">40 € / sem.</span>
                         </div>
                     </div>
 
@@ -548,8 +647,8 @@
         <section id="page-engagements" class="page-section max-w-4xl mx-auto px-4 py-12">
             <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-choupi-border">
                 <div class="text-center mb-8">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-choupi-blue">Sécurité & Rigueur</span>
-                    <h1 class="font-heading text-3xl font-medium text-choupi-green mt-1">Nos Engagements</h1>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-choupi-blue">Sécurité & rigueur</span>
+                    <h1 class="font-heading text-3xl font-medium text-choupi-green mt-1">Nos engagements</h1>
                 </div>
 
                 <div class="space-y-6">
@@ -583,8 +682,8 @@
         <!-- ================= FAQ ================= -->
         <section id="page-faq" class="page-section max-w-4xl mx-auto px-4 py-12">
             <div class="text-center mb-8">
-                <span class="text-xs font-semibold uppercase tracking-widest text-choupi-gold">Questions Courantes</span>
-                <h1 class="font-heading text-3xl font-medium text-choupi-green mt-1">Foire Aux Questions</h1>
+                <span class="text-xs font-semibold uppercase tracking-widest text-choupi-gold">Questions courantes</span>
+                <h1 class="font-heading text-3xl font-medium text-choupi-green mt-1">Foire aux questions</h1>
             </div>
 
             <div class="space-y-4">
@@ -637,7 +736,7 @@
         <!-- ================= CONTACT (EMAIL EXCLUSIF) ================= -->
         <section id="page-contact" class="page-section max-w-3xl mx-auto px-4 py-12">
             <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-md border border-choupi-border text-center">
-                <span class="text-xs font-semibold uppercase tracking-widest text-choupi-gold">Contact Direct</span>
+                <span class="text-xs font-semibold uppercase tracking-widest text-choupi-gold">Contact direct</span>
                 <h1 class="font-heading text-3xl font-medium text-choupi-green mb-3 mt-1">Écrivez-nous</h1>
                 <p class="text-xs sm:text-sm text-choupi-brown/70 max-w-md mx-auto mb-8">
                     Pour toute question ou demande de renseignements, nous sommes joignables directement par courrier électronique.
@@ -665,59 +764,166 @@
         </div>
     </footer>
 
+    <!-- BOUTON FLOTTANT ACTION RAPIDE -->
+    <div id="floating-cta" class="fixed bottom-6 right-6 z-40 opacity-0 pointer-events-none transform translate-y-4">
+        <button onclick="showPage('composer')" class="bg-choupi-gold text-white font-medium text-xs sm:text-sm px-5 py-3 rounded-full shadow-lg hover:bg-choupi-gold/90 transition-all flex items-center gap-2 border border-white/20">
+            <span>✨</span>
+            <span>Composer ma garde</span>
+        </button>
+    </div>
+
     <!-- SCRIPT JAVASCRIPT & INTERACTIONS -->
     <script>
         let childCardCounter = 0;
 
-        // Navigation SPA
+        // Navigation SPA avec animation de transition fluide
         function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+            const currentActive = document.querySelector('.page-section.active');
             const targetPage = document.getElementById('page-' + pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
+
+            if (!targetPage || currentActive === targetPage) {
+                document.getElementById('mobile-nav')?.classList.add('hidden');
+                return;
             }
-            document.getElementById('mobile-nav').classList.add('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (currentActive) {
+                currentActive.style.opacity = '0';
+                currentActive.style.transform = 'translateY(-8px)';
+                setTimeout(() => {
+                    currentActive.classList.remove('active');
+                    currentActive.style.opacity = '';
+                    currentActive.style.transform = '';
+                    
+                    targetPage.classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 200);
+            } else {
+                targetPage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            document.getElementById('mobile-nav')?.classList.add('hidden');
         }
 
         function toggleMobileNav() {
             document.getElementById('mobile-nav').classList.toggle('hidden');
         }
 
-        // Calculateur de tarif en temps réel
+        // Calculateur de tarif en temps réel avec transmission vers le formulaire de garde
         function updateCostCalculator() {
-            const hours = document.getElementById('hours-slider').value;
-            document.getElementById('hours-display').innerText = `${hours} heure${hours > 1 ? 's' : ''} / semaine`;
+            const hoursSlider = document.getElementById('hours-slider');
+            if (!hoursSlider) return;
+            
+            const hours = parseInt(hoursSlider.value) || 1;
+            const hoursDisplay = document.getElementById('hours-display');
+            if (hoursDisplay) {
+                hoursDisplay.innerText = `${hours} heure${hours > 1 ? 's' : ''} / semaine`;
+            }
             
             const gross = hours * 20;
             const net = gross * 0.5;
 
-            document.getElementById('gross-cost').innerText = `${gross} € / sem.`;
-            document.getElementById('net-cost').innerText = `${net} € / sem.`;
+            const grossEl = document.getElementById('gross-cost');
+            const netEl = document.getElementById('net-cost');
+            if (grossEl) grossEl.innerText = `${gross} € / sem.`;
+            if (netEl) netEl.innerText = `${net} € / sem.`;
+
+            // Transmission automatique de la valeur du simulateur au formulaire de demande de garde
+            const hoursInputForm = document.getElementById('hours-per-week');
+            if (hoursInputForm) {
+                hoursInputForm.value = hours;
+            }
+
+            // Mise à jour de la carte récapitulative du formulaire
+            updateFormSummary(hours);
         }
 
-        // Filtrage des activités
-        function filterActivities(category) {
-            const buttons = document.querySelectorAll('.activity-filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active', 'bg-choupi-gold', 'text-white'));
+        function updateCalculatedEstimate() {
+            const hoursInput = document.getElementById('hours-per-week');
+            const hours = hoursInput ? parseInt(hoursInput.value) || 0 : 4;
             
-            event.target.classList.add('active', 'bg-choupi-gold', 'text-white');
+            // Synchronisation retour vers le slider de l'accueil
+            const hoursSlider = document.getElementById('hours-slider');
+            if (hoursSlider && hoursSlider.value != hours && hours > 0) {
+                hoursSlider.value = hours;
+                const hoursDisplay = document.getElementById('hours-display');
+                if (hoursDisplay) hoursDisplay.innerText = `${hours} heure${hours > 1 ? 's' : ''} / semaine`;
+                const grossEl = document.getElementById('gross-cost');
+                if (grossEl) grossEl.innerText = `${hours * 20} € / sem.`;
+                const netEl = document.getElementById('net-cost');
+                if (netEl) netEl.innerText = `${hours * 10} € / sem.`;
+            }
 
-            const cards = document.querySelectorAll('.activity-card');
-            cards.forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+            updateFormSummary(hours);
+        }
+
+        function updateFormSummary(hours) {
+            const summaryText = document.getElementById('form-summary-text');
+            const summaryPrice = document.getElementById('form-summary-price');
+            if (summaryText && summaryPrice) {
+                const net = hours * 10;
+                summaryText.innerText = `${hours} heure${hours > 1 ? 's' : ''} de garde par semaine`;
+                summaryPrice.innerText = `${net} € / sem.`;
+            }
+        }
+
+        // Vérificateur de commune toulousaine
+        const coveredTowns = [
+            'toulouse', 'tournefeuille', 'saint-lys', 'saint lys', 'colomiers', 'blagnac', 'balma', 
+            'cugnaux', 'muret', 'ramonville', 'ramonville-saint-agne', 'ramonville saint agne',
+            'plaisance', 'plaisance-du-touch', 'plaisance du touch',
+            'labege', 'labège', 'pibrac', 'frouzins', 'seysses',
+            'la salvetat', 'la salvetat-saint-gilles', 'la salvetat saint gilles',
+            'cornebarrieu', 'portet', 'portet-sur-garonne', 'portet sur garonne',
+            'escalquens', 'auzeville', 'auzeville-tolosane', 'castelginest', 'fenouillet',
+            'saint-orens', 'saint orens', 'saint-orens-de-gameville', 'l\'union', 'union',
+            'villeneuve-tolosane', 'villeneuve tolosane', 'castanet', 'castanet-tolosan',
+            'leguevin', 'léguevin', 'brax', 'fontenilles', 'roques', 'pinsaguel',
+            'quint-fonsegrives', 'quint fonsegrives', 'aucamville', 'saint-alban', 'saint-jean'
+        ];
+
+        function resetTownCoverage() {
+            const result = document.getElementById('town-search-result');
+            if (result) result.innerText = '';
+        }
+
+        function checkTownCoverage() {
+            const input = document.getElementById('town-search-input');
+            const result = document.getElementById('town-search-result');
+            if (!input || !result) return;
+
+            const rawVal = input.value.trim().toLowerCase();
+            const val = rawVal.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+
+            if (val.length < 2) {
+                result.className = 'text-xs sm:text-sm font-medium text-choupi-terracotta bg-choupi-goldLight p-2.5 rounded-xl border border-choupi-gold/30';
+                result.innerText = "Veuillez saisir le nom complet de votre commune avant de vérifier.";
+                return;
+            }
+
+            const isCovered = coveredTowns.some(town => {
+                const normTown = town.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+                if (normTown === val) return true;
+                if (val.includes(normTown) && normTown.length >= 4) return true;
+                if (normTown.includes(val) && val.length >= 4 && val !== 'saint' && val !== 'sainte') return true;
+                return false;
             });
+
+            if (isCovered) {
+                result.className = 'text-xs sm:text-sm font-medium text-choupi-green bg-choupi-greenLight p-2.5 rounded-xl border border-choupi-green/30';
+                result.innerText = "✓ Excellente nouvelle : Choupigarde intervient bien dans votre secteur avec le crédit d'impôt immédiat !";
+            } else {
+                result.className = 'text-xs sm:text-sm font-medium text-choupi-terracotta bg-choupi-goldLight p-2.5 rounded-xl border border-choupi-gold/30';
+                result.innerText = "✦ Nous intervenons dans un rayon de ~20 km autour de Toulouse. N'hésitez pas à nous envoyer votre demande pour confirmation !";
+            }
         }
 
         // Gestionnaire d'ajout d'enfant
         function addChildCard() {
-            childCardCounter++;
             const container = document.getElementById('children-container');
-            
+            if (!container) return;
+
+            childCardCounter++;
             const card = document.createElement('div');
             card.id = `child-card-${childCardCounter}`;
             card.className = "bg-choupi-bg p-5 rounded-2xl border border-choupi-border space-y-4 relative transition-all";
@@ -740,7 +946,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold uppercase text-choupi-brown mb-1">Rythme & Préférences</label>
+                    <label class="block text-xs font-semibold uppercase text-choupi-brown mb-1">Rythme & préférences</label>
                     <textarea rows="2" placeholder="Précisez ce que votre enfant aime particulièrement..." class="w-full bg-white border border-choupi-border rounded-xl p-2.5 text-sm focus:outline-none focus:border-choupi-gold"></textarea>
                 </div>
             `;
@@ -753,11 +959,44 @@
             if (card) card.remove();
         }
 
+        function showNotification(message) {
+            let notif = document.getElementById('custom-notification');
+            if (!notif) {
+                notif = document.createElement('div');
+                notif.id = 'custom-notification';
+                notif.className = 'fixed bottom-6 left-6 bg-choupi-green text-white px-6 py-4 rounded-2xl shadow-xl z-50 transition-all duration-300 transform translate-y-10 opacity-0 flex items-center gap-3';
+                notif.innerHTML = `<span>✨</span><span id="custom-notif-text"></span>`;
+                document.body.appendChild(notif);
+            }
+            document.getElementById('custom-notif-text').innerText = message;
+            requestAnimationFrame(() => {
+                notif.classList.remove('translate-y-10', 'opacity-0');
+                notif.classList.add('translate-y-0', 'opacity-100');
+            });
+            setTimeout(() => {
+                notif.classList.remove('translate-y-0', 'opacity-100');
+                notif.classList.add('translate-y-10', 'opacity-0');
+            }, 4000);
+        }
+
         function submitGardeForm(e) {
             e.preventDefault();
-            alert("Votre demande a bien été envoyée ! Nous vous répondrons très rapidement par e-mail.");
+            showNotification("Votre demande a bien été transmise ! Je vous répondrai très rapidement par e-mail.");
             showPage('home');
         }
+
+        // Affichage du CTA flottant au défilement
+        window.addEventListener('scroll', () => {
+            const floatingCta = document.getElementById('floating-cta');
+            if (!floatingCta) return;
+            if (window.scrollY > 350) {
+                floatingCta.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                floatingCta.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            } else {
+                floatingCta.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                floatingCta.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+            }
+        });
 
         // Initialisation
         window.addEventListener('DOMContentLoaded', () => {
