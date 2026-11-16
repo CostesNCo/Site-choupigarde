@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choupigarde - Garde d'enfants sur-mesure à Toulouse</title>
+
+    <!-- Favicon Choupigarde (placer le fichier favicon.png dans le même dossier que ce fichier HTML) -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <meta name="theme-color" content="#FAF7F2">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -582,17 +588,17 @@
                         
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             <label class="cursor-pointer border border-choupi-border rounded-xl p-3 bg-choupi-bg hover:border-choupi-gold transition-colors flex items-center gap-2">
-                                <input type="radio" name="type_besoin" value="regulier" class="accent-choupi-gold" checked>
+                                <input type="radio" name="type_besoin" value="Garde régulière" class="accent-choupi-gold" checked>
                                 <span class="text-xs sm:text-sm font-medium">Garde régulière</span>
                             </label>
 
                             <label class="cursor-pointer border border-choupi-border rounded-xl p-3 bg-choupi-bg hover:border-choupi-gold transition-colors flex items-center gap-2">
-                                <input type="radio" name="type_besoin" value="ponctuel" class="accent-choupi-gold">
+                                <input type="radio" name="type_besoin" value="Garde ponctuelle" class="accent-choupi-gold">
                                 <span class="text-xs sm:text-sm font-medium">Garde ponctuelle</span>
                             </label>
 
                             <label class="cursor-pointer border border-choupi-border rounded-xl p-3 bg-choupi-bg hover:border-choupi-gold transition-colors flex items-center gap-2">
-                                <input type="radio" name="type_besoin" value="vacances" class="accent-choupi-gold">
+                                <input type="radio" name="type_besoin" value="Vacances scolaires" class="accent-choupi-gold">
                                 <span class="text-xs sm:text-sm font-medium">Vacances scolaires</span>
                             </label>
                         </div>
@@ -600,11 +606,11 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                             <div>
                                 <label class="block text-xs font-semibold uppercase text-choupi-brown mb-1">Commune d'intervention</label>
-                                <input type="text" required placeholder="Ex: Toulouse, Saint-Lys, Colomiers..." class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
+                                <input type="text" id="parent-town" required placeholder="Ex: Toulouse, Saint-Lys, Colomiers..." class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold uppercase text-choupi-brown mb-1">Volume d'heures estimé / semaine</label>
-                                <input type="number" id="hours-per-week" min="1" max="40" placeholder="Ex: 4" oninput="updateCalculatedEstimate()" class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
+                                <input type="number" id="hours-per-week" min="1" max="40" value="4" required placeholder="Ex: 4" oninput="updateCalculatedEstimate()" class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
                             </div>
                         </div>
                     </div>
@@ -627,16 +633,16 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold uppercase text-choupi-brown mb-1">Nom complet</label>
-                                <input type="text" required placeholder="Votre nom" class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
+                                <input type="text" id="parent-name" required placeholder="Votre nom" class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold uppercase text-choupi-brown mb-1">Adresse e-mail</label>
-                                <input type="email" required placeholder="votre.email@exemple.fr" class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
+                                <input type="email" id="parent-email" required placeholder="votre.email@exemple.fr" class="w-full bg-choupi-bg border border-choupi-border rounded-xl p-3 text-sm focus:outline-none focus:border-choupi-gold">
                             </div>
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full py-3.5 bg-choupi-gold text-white font-medium rounded-xl shadow-md hover:bg-choupi-gold/90 transition-transform active:scale-95 text-base">
+                    <button type="submit" id="submit-garde-btn" class="w-full py-3.5 bg-choupi-gold text-white font-medium rounded-xl shadow-md hover:bg-choupi-gold/90 transition-transform active:scale-95 text-base">
                         Envoyer ma demande d'estimation
                     </button>
                 </form>
@@ -774,6 +780,12 @@
 
     <!-- SCRIPT JAVASCRIPT & INTERACTIONS -->
     <script>
+        // =========================================================================
+        // CONFIGURATION ENVOI D'E-MAIL (Remplace par ta clé gratuite web3forms.com)
+        // =========================================================================
+        const WEB3FORMS_ACCESS_KEY = "VOTRE_CLE_WEB3FORMS";
+        const DESTINATION_EMAIL = "emmacostespro@gmail.com";
+
         let childCardCounter = 0;
 
         // Navigation SPA avec animation de transition fluide
@@ -828,13 +840,11 @@
             if (grossEl) grossEl.innerText = `${gross} € / sem.`;
             if (netEl) netEl.innerText = `${net} € / sem.`;
 
-            // Transmission automatique de la valeur du simulateur au formulaire de demande de garde
             const hoursInputForm = document.getElementById('hours-per-week');
             if (hoursInputForm) {
                 hoursInputForm.value = hours;
             }
 
-            // Mise à jour de la carte récapitulative du formulaire
             updateFormSummary(hours);
         }
 
@@ -842,7 +852,6 @@
             const hoursInput = document.getElementById('hours-per-week');
             const hours = hoursInput ? parseInt(hoursInput.value) || 0 : 4;
             
-            // Synchronisation retour vers le slider de l'accueil
             const hoursSlider = document.getElementById('hours-slider');
             if (hoursSlider && hoursSlider.value != hours && hours > 0) {
                 hoursSlider.value = hours;
@@ -926,7 +935,7 @@
             childCardCounter++;
             const card = document.createElement('div');
             card.id = `child-card-${childCardCounter}`;
-            card.className = "bg-choupi-bg p-5 rounded-2xl border border-choupi-border space-y-4 relative transition-all";
+            card.className = "child-card bg-choupi-bg p-5 rounded-2xl border border-choupi-border space-y-4 relative transition-all";
             
             card.innerHTML = `
                 <div class="flex items-center justify-between border-b border-choupi-border/60 pb-2">
@@ -937,17 +946,17 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-semibold uppercase text-choupi-brown mb-1">Prénom ou Surnom</label>
-                        <input type="text" placeholder="Ex: Mon enfant" required class="w-full bg-white border border-choupi-border rounded-xl p-2.5 text-sm focus:outline-none focus:border-choupi-gold">
+                        <input type="text" placeholder="Ex: Mon enfant" required class="child-name w-full bg-white border border-choupi-border rounded-xl p-2.5 text-sm focus:outline-none focus:border-choupi-gold">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold uppercase text-choupi-brown mb-1">Besoins prioritaires</label>
-                        <input type="text" placeholder="Ex: Devoirs, activités manuelles, détente..." required class="w-full bg-white border border-choupi-border rounded-xl p-2.5 text-sm focus:outline-none focus:border-choupi-gold">
+                        <input type="text" placeholder="Ex: Devoirs, activités manuelles, détente..." required class="child-needs w-full bg-white border border-choupi-border rounded-xl p-2.5 text-sm focus:outline-none focus:border-choupi-gold">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold uppercase text-choupi-brown mb-1">Rythme & préférences</label>
-                    <textarea rows="2" placeholder="Précisez ce que votre enfant aime particulièrement..." class="w-full bg-white border border-choupi-border rounded-xl p-2.5 text-sm focus:outline-none focus:border-choupi-gold"></textarea>
+                    <textarea rows="2" placeholder="Précisez ce que votre enfant aime particulièrement..." class="child-preferences w-full bg-white border border-choupi-border rounded-xl p-2.5 text-sm focus:outline-none focus:border-choupi-gold"></textarea>
                 </div>
             `;
             
@@ -959,15 +968,15 @@
             if (card) card.remove();
         }
 
-        function showNotification(message) {
+        function showNotification(message, isError = false) {
             let notif = document.getElementById('custom-notification');
             if (!notif) {
                 notif = document.createElement('div');
                 notif.id = 'custom-notification';
-                notif.className = 'fixed bottom-6 left-6 bg-choupi-green text-white px-6 py-4 rounded-2xl shadow-xl z-50 transition-all duration-300 transform translate-y-10 opacity-0 flex items-center gap-3';
-                notif.innerHTML = `<span>✨</span><span id="custom-notif-text"></span>`;
                 document.body.appendChild(notif);
             }
+            notif.className = `fixed bottom-6 left-6 ${isError ? 'bg-red-600' : 'bg-choupi-green'} text-white px-6 py-4 rounded-2xl shadow-xl z-50 transition-all duration-300 transform translate-y-10 opacity-0 flex items-center gap-3 max-w-md text-xs sm:text-sm`;
+            notif.innerHTML = `<span>${isError ? '⚠️' : '✨'}</span><span id="custom-notif-text"></span>`;
             document.getElementById('custom-notif-text').innerText = message;
             requestAnimationFrame(() => {
                 notif.classList.remove('translate-y-10', 'opacity-0');
@@ -976,13 +985,90 @@
             setTimeout(() => {
                 notif.classList.remove('translate-y-0', 'opacity-100');
                 notif.classList.add('translate-y-10', 'opacity-0');
-            }, 4000);
+            }, 5000);
         }
 
-        function submitGardeForm(e) {
+        // Collecte et envoi réel des données du formulaire
+        async function submitGardeForm(e) {
             e.preventDefault();
-            showNotification("Votre demande a bien été transmise ! Je vous répondrai très rapidement par e-mail.");
-            showPage('home');
+
+            const submitBtn = document.getElementById('submit-garde-btn');
+            const originalBtnText = submitBtn.innerText;
+
+            const childCards = document.querySelectorAll('#children-container .child-card');
+            let childrenSummary = "";
+            childCards.forEach((card, index) => {
+                const name = card.querySelector('.child-name')?.value.trim() || 'Non précisé';
+                const needs = card.querySelector('.child-needs')?.value.trim() || 'Non précisé';
+                const prefs = card.querySelector('.child-preferences')?.value.trim() || 'Aucune précision';
+                childrenSummary += `\n--- Enfant #${index + 1} ---\n• Prénom : ${name}\n• Besoins : ${needs}\n• Rythme & préférences : ${prefs}\n`;
+            });
+
+            const typeBesoin = document.querySelector('input[name="type_besoin"]:checked')?.value || 'Non précisé';
+            const commune = document.getElementById('parent-town')?.value.trim() || '';
+            const heures = parseInt(document.getElementById('hours-per-week')?.value) || 4;
+            const tarifBrut = heures * 20;
+            const tarifNet = heures * 10;
+            const parentName = document.getElementById('parent-name')?.value.trim() || '';
+            const parentEmail = document.getElementById('parent-email')?.value.trim() || '';
+
+            const messageComplet = `Nouvelle demande de garde sur-mesure via le site Choupigarde :\n\n` +
+                `👤 PARENT :\n• Nom : ${parentName}\n• E-mail : ${parentEmail}\n• Commune : ${commune}\n\n` +
+                `📅 BESOIN & ESTIMATION :\n• Type de garde : ${typeBesoin}\n• Volume : ${heures} h / semaine\n• Tarif brut : ${tarifBrut} € / sem.\n• Reste à charge après crédit d'impôt (-50%) : ${tarifNet} € / sem.\n\n` +
+                `🧸 ENFANT(S) (${childCards.length}) :${childrenSummary}`;
+
+            if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY === "VOTRE_CLE_WEB3FORMS") {
+                const subject = encodeURIComponent(`Demande de garde Choupigarde - ${parentName} (${commune})`);
+                const body = encodeURIComponent(messageComplet);
+                window.location.href = `mailto:${DESTINATION_EMAIL}?subject=${subject}&body=${body}`;
+                showNotification("Votre messagerie va s'ouvrir avec votre demande pré-remplie. Il ne vous reste plus qu'à cliquer sur Envoyer !");
+                return;
+            }
+
+            try {
+                submitBtn.disabled = true;
+                submitBtn.innerText = "Envoi en cours...";
+
+                const response = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        access_key: WEB3FORMS_ACCESS_KEY,
+                        subject: `Nouvelle demande de garde - ${parentName} (${commune})`,
+                        from_name: "Site Choupigarde",
+                        replyto: parentEmail,
+                        Parent: parentName,
+                        Email_Parent: parentEmail,
+                        Commune: commune,
+                        Type_de_garde: typeBesoin,
+                        Heures_par_semaine: `${heures}h`,
+                        Estimation_Net_CESU: `${tarifNet} € / sem.`,
+                        Details_Enfants: childrenSummary
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showNotification("Votre demande a bien été transmise ! Je vous répondrai très rapidement par e-mail.");
+                    document.getElementById('garde-multi-form').reset();
+                    document.getElementById('children-container').innerHTML = '';
+                    childCardCounter = 0;
+                    addChildCard();
+                    updateCostCalculator();
+                    showPage('home');
+                } else {
+                    throw new Error(result.message || "Erreur lors de l'envoi");
+                }
+            } catch (error) {
+                showNotification("Une erreur est survenue lors de l'envoi. Vous pouvez nous écrire directement à emmacostespro@gmail.com.", true);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalBtnText;
+            }
         }
 
         // Affichage du CTA flottant au défilement
